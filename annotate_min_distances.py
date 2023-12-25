@@ -3,7 +3,8 @@ import numpy as np
 import os
 import re
 
-final_df = pd.read_excel("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered.xlsx")
+working_dir = "/path/to/working_dir/"
+final_df = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered.xlsx")
 
 all_pdbs = final_df['Entry ID'].tolist()
 all_ligands = final_df['Ligand ID'].tolist()
@@ -15,7 +16,7 @@ lys_dist = []
 
 q=0
 while q<len(all_pdbs):
-    temp_file = "/Users/ananthansadagopan/Downloads/min_distance_from_" + str(all_pdbs[q]) + "_to_" + str(all_ligands[q]) + ".csv"
+    temp_file = working_dir + "min_distance_from_" + str(all_pdbs[q]) + "_to_" + str(all_ligands[q]) + ".csv"
 
     try:
         df = pd.read_csv(temp_file)
@@ -61,4 +62,4 @@ final_df['min_distance_from_ligand_to_tyr_OH'] = tyr_dist
 final_df['min_distance_from_ligand_to_met_SD'] = met_dist
 final_df['min_distance_from_ligand_to_cys_SG'] = cys_dist
 
-final_df.to_csv("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered_distance_annotated.csv", index=False)
+final_df.to_csv(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.csv", index=False)
