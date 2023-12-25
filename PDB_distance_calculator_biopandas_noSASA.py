@@ -7,36 +7,27 @@ from itertools import chain
 from biopandas.pdb import PandasPdb
 from Bio.PDB import PDBParser
 
-#Run on High Affinity csv sent to Amit / Ellen
-
-df = pd.read_excel("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered.xlsx")
-#df = df[df['Entry ID']!="0003"]
+working_dir = "/path/to/working_dir/"
+df = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered.xlsx")
 all_pdbs = df['Entry ID'].tolist()
 all_ligands = df['Ligand ID'].tolist()
 
 ww=0
 while ww<len(all_pdbs):
-
     p = PDBParser(QUIET=1)
-
     end = 0
-
     value = all_pdbs[ww]
     ligand = all_ligands[ww]
     
     """
-    pdb = "/Users/ananthansadagopan/Downloads/" + str(value) + ".pdb"
-    pdb_gz = "/Users/ananthansadagopan/Downloads/" + str(value) + ".pdb.gz"
-
+    pdb = working_dir + str(value) + ".pdb"
+    pdb_gz = working_dir + str(value) + ".pdb.gz"
     print(pdb_gz)
-
-    pdb_download = "/Users/ananthansadagopan/Downloads/" + str(value) + "_download.txt"
-
+    pdb_download = working_dir + str(value) + "_download.txt"
     with open(pdb_download, 'a+') as the_file:
         the_file.write(value)
-
-    os.system("chmod +x /Users/ananthansadagopan/Downloads/batch_download.sh")
-    os.system("/Users/ananthansadagopan/Downloads/batch_download.sh -o /Users/ananthansadagopan/Downloads/ -f %s -p" % (pdb_download))
+    os.system("chmod +x %s/batch_download.sh" % (working_dir))
+    os.system("%s/batch_download.sh -o %s -f %s -p" % (working_dir,working_dir,pdb_download))
     os.system("gunzip -k %s" % pdb)
 
     try:
@@ -45,7 +36,6 @@ while ww<len(all_pdbs):
         ww=ww+1
         continue
     sr = ShrakeRupley()
-
     try:
         sr.compute(struct, level="S")
     except:
@@ -53,19 +43,15 @@ while ww<len(all_pdbs):
         continue
     """
 
-    #temp_ligand_coords = "/Users/ananthansadagopan/Downloads/" + str(value) + "_ligand_temp.txt"
-    #ligand_coords = "/Users/ananthansadagopan/Downloads/" + str(value) + "_ligand.txt"
-
+    #temp_ligand_coords = working_dir + str(value) + "_ligand_temp.txt"
+    #ligand_coords = working_dir + str(value) + "_ligand.txt"
     #os.system("grep %s %s > %s" % (ligand,pdb,temp_ligand_coords)) #Need to choose the ligand
     #os.system("grep 'HETATM' %s > %s" % (temp_ligand_coords,ligand_coords))
-
     #file1 = open(ligand_coords, 'r')
     #lines = file1.readlines()
-
     #temp_vals = []
     #for q in lines:
     #    temp_vals.append(re.sub(' +', ' ', q).split(" "))
-        
     #df = pd.DataFrame(temp_vals)
 
     print(value)
@@ -102,9 +88,9 @@ while ww<len(all_pdbs):
     for temp_residue in residues_to_iterate:
 
         """
-        temp_coords = "/Users/ananthansadagopan/Downloads/" + str(value) + "_" + temp_residue + "_temp.txt"
-        inter_coords = "/Users/ananthansadagopan/Downloads/" + str(value) + "_" + temp_residue + "_inter.txt"
-        final_coords = "/Users/ananthansadagopan/Downloads/" + str(value) + "_" + temp_residue + ".txt"
+        temp_coords = working_dir + str(value) + "_" + temp_residue + "_temp.txt"
+        inter_coords = working_dir + str(value) + "_" + temp_residue + "_inter.txt"
+        final_coords = working_dir + str(value) + "_" + temp_residue + ".txt"
         os.system("grep %s %s > %s" % (temp_residue,pdb,temp_coords))
         os.system("grep 'ATOM' %s > %s" % (temp_coords,inter_coords))
         
@@ -206,7 +192,7 @@ while ww<len(all_pdbs):
 
     df_out = df_out.sort_values(by=['Min_Distance_from_Reactive_Atom_to_Ligand'], ascending=True)
 
-    df_out.to_csv("/Users/ananthansadagopan/Downloads/min_distance_from_" + str(value) + "_to_" + str(ligand) + ".csv", index=False)
+    df_out.to_csv(working_dir + "min_distance_from_" + str(value) + "_to_" + str(ligand) + ".csv", index=False)
 
     """
     os.system("rm -rf %s" % pdb)
