@@ -21,7 +21,8 @@ sns.set(rc={'figure.figsize':(6, 3)})
 sns.set(font_scale=1)
 dpi_set = 1200
 
-df = pd.read_excel("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
+working_dir = "/path/to/working_dir/"
+df = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
 
 vals = ['min_distance_from_ligand_to_lys_NZ', 'min_distance_from_ligand_to_tyr_OH', 'min_distance_from_ligand_to_met_SD', 'min_distance_from_ligand_to_cys_SG', 'min_distance_from_ligand_to_ligandable_atom']
 
@@ -54,4 +55,4 @@ for a in vals:
         ax.set_xlabel('Minimum Distance to Ligandable Atom (Å)', fontsize=14, labelpad=10)
 
     ax.set_xlim([-0.1, 20.1])
-    fig.savefig("/Users/ananthansadagopan/Downloads/" + a + "_histogram_PDB_database.pdf", dpi=dpi_set, bbox_inches = 'tight')
+    fig.savefig(working_dir + a + "_histogram_PDB_database.pdf", dpi=dpi_set, bbox_inches = 'tight')
