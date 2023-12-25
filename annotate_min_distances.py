@@ -62,4 +62,4 @@ final_df['min_distance_from_ligand_to_tyr_OH'] = tyr_dist
 final_df['min_distance_from_ligand_to_met_SD'] = met_dist
 final_df['min_distance_from_ligand_to_cys_SG'] = cys_dist
 
-final_df.to_csv(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.csv", index=False)
+final_df.to_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx", index=False)
