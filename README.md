@@ -12,6 +12,14 @@ Entry ID, Ligand, Value, Symbol, Type, Unit, PDB ID, Resolution, Structure Title
 
 (4) Download the resulting records in batches of 2500 as .csv files, and concatenate them to yield a file: merged_rcsb_calls.csv.
 
-(5) 
+(5) Run a short script:
+
+```
+import pandas as pd
+df = pd.read_csv("/Users/ananthansadagopan/Downloads/merged_rcsb_calls.csv")
+df = df.dropna(subset=['Ligand ID'])
+df = df.ffill()
+df.to_csv("/Users/ananthansadagopan/Downloads/merged_rcsb_calls_ffilled.csv")
+```
 
 (2) Run pdb_distance_calculator_biopandas_nosasa.py
