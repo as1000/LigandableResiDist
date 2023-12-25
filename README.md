@@ -27,4 +27,3 @@ df.to_csv(working_dir + "/merged_rcsb_calls_ffilled.csv", index=False)
 
 (7) Run PDB_distance_calculator_biopandas_noSASA.py on the resulting file to calculate the distance of ligand to ligandable residues.
 
-(8) 
