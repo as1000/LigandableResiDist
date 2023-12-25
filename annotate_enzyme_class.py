@@ -1,11 +1,12 @@
 import pandas as pd
 
+working_dir = "/path/to/working_dir/"
 
-df = pd.read_excel("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
+df = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
 
 new_method = df['Gene_Name'].tolist()
 
-df3 = pd.read_csv("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/protein_class_Enzymes.tsv", sep="\t")
+df3 = pd.read_csv(working_dir + "protein_class_Enzymes.tsv", sep="\t")
 gene = df3['Gene'].tolist()
 biol_process = df3['Biological process'].tolist()
 mol_func = df3['Molecular function'].tolist()
@@ -67,4 +68,4 @@ while q<len(val1):
 
 df['Enzyme'] = enzyme_val
 
-df.to_csv("/Users/ananthansadagopan/Downloads/temp_new.csv", index=False)
+df.to_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx", index=False)
