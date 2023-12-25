@@ -31,7 +31,7 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (8) Run annotate_min_distances.py on the output files generated in the previous step to annotate the minimum distances from ligand to ligandable residues on the master sheet: merged_rcsb_calls_ffilled_filtered.xlsx, to yield: merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx.
 
-(9) To annotate which entries include enzymes in the structure, run annotate_enzyme_class.py to update merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx with an "Enzyme" column; 0 indicates no enzymes in the structure while 1 indicates an enzyme is present. Note: this script uses a file from ProteinAtlas to annotate enzyme class. https://www.proteinatlas.org/download/proteinatlas.tsv.zip; it was downloaded on May 25th, 2022.
+(9) To annotate which entries include enzymes in the structure, run annotate_enzyme_class.py to update merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx with an "Enzyme" column; 0 indicates no enzymes in the structure while 1 indicates an enzyme is present. Note: this script uses a file from ProteinAtlas to annotate enzyme class (protein_class_Enzymes.tsv): https://www.proteinatlas.org/download/proteinatlas.tsv.zip; it was downloaded on May 25th, 2022.
 
 (10) Generate summary plots using: plot_distance_to_ligandable_res_histograms.py and/or ptm_plotting_CDFs.py
 
