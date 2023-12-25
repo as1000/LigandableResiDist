@@ -25,7 +25,9 @@ def split_advanced(strng, sep, pos):
     strng = strng.split(sep)
     return sep.join(strng[:pos]), sep.join(strng[pos:])
 
-df = pd.read_excel("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
+working_dir = "/path/to/working_dir/"
+
+df = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
 #df = df[df['Enzyme_Class']!="No_Annotation"]
 lys_dist = [x for x in df['min_distance_from_ligand_to_lys_NZ'].tolist() if x == x]
 cys_dist = [x for x in df['min_distance_from_ligand_to_cys_SG'].tolist() if x == x]
@@ -59,4 +61,4 @@ for a, label, color in zip(vals_to_iterate, labels, colors):
     dpi_set = 300
     plt.tick_params(bottom='on', left='on')
 
-    fig.savefig("/Users/ananthansadagopan/Documents/ChoudharyLab/PTMs/combined_low_and_high_affinity_SLDnoCDF_%s.pdf" % (label.split(" ")[-3]), dpi=dpi_set)
+    fig.savefig(working_dir + "combined_low_and_high_affinity_SLDnoCDF_%s.pdf" % (label.split(" ")[-3]), dpi=dpi_set)
