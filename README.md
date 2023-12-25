@@ -23,7 +23,15 @@ df = df.ffill()
 df.to_csv(working_dir + "/merged_rcsb_calls_ffilled.csv", index=False)
 ```
 
-(6) Sort the resulting .csv by ligand formula and remove ligands with less than 10 carbons, inorganic ligands, and promiscuous organic ligands (e.g. ATP, GTP, etc.) to yield merged_rcsb_calls_ffilled_filtered.csv.
+(6) Sort the resulting .csv by ligand formula and remove ligands with less than 10 carbons, inorganic ligands, and promiscuous organic ligands (e.g. ATP, GTP, etc.) to yield merged_rcsb_calls_ffilled_filtered.xlsx.
 
-(7) Run PDB_distance_calculator_biopandas_noSASA.py on the resulting file to calculate the distance of ligand to ligandable residues.
+(7) Run PDB_distance_calculator_biopandas_noSASA.py on the resulting file to calculate the distance of ligand to ligandable residues for each PDB-ligand entry.
+
+(8) Run annotate_min_distances.py on the output files generated in the previous step to annotate the minimum distances from ligand to ligandable residues on the master sheet: merged_rcsb_calls_ffilled_filtered.xlsx, to yield: merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx.
+
+(9) Generate summary plots using: plot_distance_to_ligandable_res_histograms.py and/or ptm_plotting_CDFs.py
+
+(10) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations.
+
+(11) 
 
