@@ -23,7 +23,7 @@ df = df.ffill()
 df.to_csv(working_dir + "/merged_rcsb_calls_ffilled.csv", index=False)
 ```
 
-Note: The affinity annotations on the resulting spreadsheet are essentially arbitrary (one experiment chosen at random from many experiments; the symbol: ~, >, < may also be incorrect at this step). This is corrected later in the workflow (step 10).
+Note: The affinity annotations on the resulting spreadsheet are essentially arbitrary (one experiment chosen at random from many experiments; the symbol: ~, >, < may also be incorrect at this step). This is corrected later in the workflow (step 11).
 
 (6) Sort the resulting .csv by ligand formula and remove ligands with less than 10 carbons, inorganic ligands, and promiscuous organic ligands (e.g. ATP, GTP, etc.) to yield merged_rcsb_calls_ffilled_filtered.xlsx.
 
@@ -31,11 +31,13 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (8) Run annotate_min_distances.py on the output files generated in the previous step to annotate the minimum distances from ligand to ligandable residues on the master sheet: merged_rcsb_calls_ffilled_filtered.xlsx, to yield: merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx.
 
-(9) Generate summary plots using: plot_distance_to_ligandable_res_histograms.py and/or ptm_plotting_CDFs.py
+(9) To annotate which entries include enzymes in the structure, run annotate_enzyme_class.py to update merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx with an "Enzyme" column; 0 indicates no enzymes in the structure while 1 indicates an enzyme is present. Note: this script uses a file from ProteinAtlas to annotate enzyme class. https://www.proteinatlas.org/download/proteinatlas.tsv.zip; it was downloaded on May 25th, 2022.
 
-(10) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations.
+(10) Generate summary plots using: plot_distance_to_ligandable_res_histograms.py and/or ptm_plotting_CDFs.py
 
-(11) Run annotate_min_affinity.py on merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx, to annotate the min(EC50, IC50, Kd, Ki) for each PDB-ligand entry. This will generate a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx. If an entry does not have any of EC50, IC50, Kd, and Ki, it's minValue will be annotated as 1e24 (this can be manually changed to "NA" if you choose).
+(11) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations.
+
+(12) Run annotate_min_affinity.py on merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx, to annotate the min(EC50, IC50, Kd, Ki) for each PDB-ligand entry. This will generate a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx. If an entry does not have any of EC50, IC50, Kd, and Ki, it's minValue will be annotated as 1e24 (this can be manually changed to "NA" if you choose).
 
 (12) 
 
