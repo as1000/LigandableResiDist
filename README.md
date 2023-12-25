@@ -39,5 +39,5 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (12) Run annotate_min_affinity.py on merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx, to annotate the min(EC50, IC50, Kd, Ki) for each PDB-ligand entry. This will generate a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx. If an entry does not have any of EC50, IC50, Kd, and Ki, it's minValue will be annotated as 1e24 (this can be manually changed to "NA" if you choose).
 
-(12) Lastly, you can annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx, which is added to the repo for reference.
+(13) Lastly, you can annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx, which is added to the repo for reference.
 
