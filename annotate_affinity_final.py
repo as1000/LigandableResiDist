@@ -1,15 +1,21 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("/Users/ananthansadagopan/Downloads/merged_affinity_sheet.txt", sep="\t")
+working_dir = "/path/to/working_dir/"
+
+df = pd.read_csv(working_dir + "merged_affinity_sheet.txt", sep="\t")
 df['Symbol'] = df['Symbol'].replace(np.nan, "~")
 df = df.fillna(method='ffill')
 uq_types = list(set(df['Type'].tolist()))
 df['Combined'] = df['Entry ID']+df['Ligand ID']
 uq_types = sorted(list(set(df['Type'].tolist())))
 
-df2 = pd.read_excel("/Users/ananthansadagopan/Downloads/merged_rcsb_calls_ffilled_filtered_distance_annotated_new.xlsx")
+df2 = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
 df2['Combined'] = df2['Entry ID'].astype(str)+df2['Ligand ID'].astype(str)
+del df2['Value']
+del df2['Symbol']
+del df2['Type']
+del df2['Unit']
 
 df2_combined_vals = df2['Combined'].tolist()
 
@@ -47,4 +53,4 @@ for a in uq_types:
 
     print(a)
 
-df2.to_excel("/Users/ananthansadagopan/Downloads/merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx", index=False)
+df2.to_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx", index=False)
