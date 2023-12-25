@@ -3,7 +3,7 @@ import numpy as np
 
 working_dir = "/path/to/working_dir/"
 
-df = pd.read_csv(working_dir + "merged_affinity_sheet.txt", sep="\t")
+df = pd.read_csv(working_dir + "merged_rcsb_calls.csv")
 df['Symbol'] = df['Symbol'].replace(np.nan, "~")
 df = df.fillna(method='ffill')
 uq_types = list(set(df['Type'].tolist()))
