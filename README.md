@@ -35,5 +35,7 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (10) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations.
 
-(11) 
+(11) Run annotate_min_affinity.py on merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx, to annotate the min(EC50, IC50, Kd, Ki) for each PDB-ligand entry. This will generate a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx. If an entry does not have any of EC50, IC50, Kd, and Ki, it's minValue will be annotated as 1e24 (this can be manually changed to "NA" if you choose).
+
+(12) 
 
