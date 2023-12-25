@@ -23,6 +23,8 @@ df = df.ffill()
 df.to_csv(working_dir + "/merged_rcsb_calls_ffilled.csv", index=False)
 ```
 
+Note: The affinity annotations on the resulting spreadsheet are essentially arbitrary (one experiment chosen at random from many experiments). This is corrected later in the workflow (step 10).
+
 (6) Sort the resulting .csv by ligand formula and remove ligands with less than 10 carbons, inorganic ligands, and promiscuous organic ligands (e.g. ATP, GTP, etc.) to yield merged_rcsb_calls_ffilled_filtered.xlsx.
 
 (7) Run PDB_distance_calculator_biopandas_noSASA.py on the resulting file to calculate the distance of ligand to ligandable residues for each PDB-ligand entry.
