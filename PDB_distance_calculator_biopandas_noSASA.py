@@ -57,7 +57,7 @@ while ww<len(all_pdbs):
     print(value)
     ppdb = PandasPdb().fetch_pdb(value)
     df_temp = ppdb.df['HETATM']
-    df_temp = df_temp[df_temp['residue_name']==ligand]
+    df_temp = df_temp[df_temp['residue_name']==str(ligand)]
 
     xvals = df_temp['x_coord'].tolist()
     yvals = df_temp['y_coord'].tolist()
