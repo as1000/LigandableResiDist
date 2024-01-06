@@ -7,7 +7,7 @@ df = pd.read_csv(working_dir + "merged_rcsb_calls.csv")
 df['Symbol'] = df['Symbol'].replace(np.nan, "~")
 df = df.fillna(method='ffill')
 uq_types = list(set(df['Type'].tolist()))
-df['Combined'] = df['Entry ID']+df['Ligand ID']
+df['Combined'] = df['Entry ID'].astype(str)
 uq_types = sorted(list(set(df['Type'].tolist())))
 
 df2 = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
@@ -17,7 +17,7 @@ del df2['Symbol']
 del df2['Type']
 del df2['Unit']
 
-df2_combined_vals = df2['Combined'].tolist()
+df2_combined_vals = df2['Entry ID'].tolist()
 
 print(uq_types)
 for a in uq_types:
