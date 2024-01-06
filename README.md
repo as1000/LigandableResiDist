@@ -35,9 +35,11 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (10) Generate summary plots using: plot_distance_to_ligandable_res_histograms.py and/or ptm_plotting_CDFs.py
 
-(11) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations.
+(11) Run annotate_affinity_final.py on merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx to annotate all available ligand affinity values for every PDB-ligand entry. This will yield a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx. Note: This script uses the file generated in step 4: merged_rcsb_calls.csv for the annotations. Note: This will not be 100% accurate for entries with multiple ligands.
 
 (12) Run annotate_min_affinity.py on merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx, to annotate the min(EC50, IC50, Kd, Ki) for each PDB-ligand entry. This will generate a new file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx. If an entry does not have any of EC50, IC50, Kd, and Ki, it's minValue will be annotated as 1e24 (this can be manually changed to "NA" if you choose).
 
-(13) Lastly, you can annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx, which is added to the repo for reference.
+(13) Remove affinity annotations for entries with multiple ligands in Excel.
+
+(14) Annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx, which is added to the repo for reference.
 
