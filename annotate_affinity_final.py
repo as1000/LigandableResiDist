@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("combined_ligand_affinity_values.csv")
+df = pd.read_csv("merged_rcsb_calls.csv")
 df['Symbol'] = df['Symbol'].replace(np.nan, "EQUAL")
 df = df[df['Ligand'].notna()]
 df = df.fillna(method='ffill')
@@ -10,7 +10,7 @@ uq_types = list(set(df['Type'].tolist()))
 df['Combined'] = df['Entry ID'].astype(str)
 uq_types = sorted(list(set(df['Type'].tolist())))
 
-df2 = pd.read_excel("initial_data.xlsx")
+df2 = pd.read_excel("merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
 df2_combined_vals = df2['Entry ID'].tolist()
 
 for a in uq_types:
@@ -67,4 +67,4 @@ for a in uq_types:
 
     print(a)
 
-df2.to_excel("test.xlsx", index=False)
+df2.to_excel("merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx", index=False)
