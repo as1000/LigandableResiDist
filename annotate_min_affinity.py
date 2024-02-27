@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import math
 
-df = pd.read_excel("test.xlsx")
+df = pd.read_excel("merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx")
 val1 = df['EC50_MinValue'].tolist()
 val2 = df['IC50_MinValue'].tolist()
 val3 = df['Kd_MinValue'].tolist()
@@ -50,4 +50,4 @@ df['MinValue'] = min_val_list
 df['MinValue_Type'] = type_list
 df['MinValue_Symbol'] = symbol_list
 
-df.to_excel("test_new.xlsx", index=False)
+df.to_excel("merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value.xlsx", index=False)
