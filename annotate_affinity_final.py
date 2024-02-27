@@ -1,30 +1,25 @@
 import pandas as pd
 import numpy as np
 
-working_dir = "/path/to/working_dir/"
-
-df = pd.read_csv(working_dir + "merged_rcsb_calls.csv")
-df['Symbol'] = df['Symbol'].replace(np.nan, "~")
+df = pd.read_csv("/Users/ananthansadagopan/Downloads/combined_ligand_affinity_values.csv")
+df['Symbol'] = df['Symbol'].replace(np.nan, "EQUAL")
+df = df[df['Ligand'].notna()]
 df = df.fillna(method='ffill')
+
 uq_types = list(set(df['Type'].tolist()))
 df['Combined'] = df['Entry ID'].astype(str)
 uq_types = sorted(list(set(df['Type'].tolist())))
 
-df2 = pd.read_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated.xlsx")
-df2['Combined'] = df2['Entry ID'].astype(str)+df2['Ligand ID'].astype(str)
-del df2['Value']
-del df2['Symbol']
-del df2['Type']
-del df2['Unit']
+#df.to_csv("/Users/ananthansadagopan/Downloads/temp2.csv")
 
+df2 = pd.read_excel("/Users/ananthansadagopan/Downloads/merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot_updated_1_6_24_422PM_AS_starting_file.xlsx")
 df2_combined_vals = df2['Entry ID'].tolist()
 
-print(uq_types)
 for a in uq_types:
     temp_df = df[df['Type']==a]
-    print(temp_df)
 
-    symbols = []
+    symbols_min = []
+    symbols_max = []
     min_val = []
     max_val = []
     units = []
@@ -33,24 +28,45 @@ for a in uq_types:
     for b in df2_combined_vals:
         q=q+1
         sub_df = temp_df[temp_df['Combined']==b]
+    
         if len(sub_df.index.tolist())>0:
-            symbols.append(sub_df['Symbol'].tolist()[0])
-            min_val.append(min(sub_df['Value'].tolist()))
-            max_val.append(max(sub_df['Value'].tolist()))
+        
+            min_val_temp = min(sub_df['Value'].tolist())
+            max_val_temp = max(sub_df['Value'].tolist())
+
+            wx=0
+            while wx<len(sub_df['Value'].tolist()):
+                if sub_df['Value'].tolist()[wx]==min_val_temp:
+                    break
+                wx=wx+1
+
+            wy=0
+            while wy<len(sub_df['Value'].tolist()):
+                if sub_df['Value'].tolist()[wy]==max_val_temp:
+                    break
+                wy=wy+1
+
+            symbols_min.append(sub_df['Symbol'].tolist()[wx])
+            symbols_max.append(sub_df['Symbol'].tolist()[wy])
+            min_val.append(min_val_temp)
+            max_val.append(max_val_temp)
             units.append(sub_df['Unit'].tolist()[0])
         else:
-            symbols.append(np.nan)
+            symbols_min.append(np.nan)
+            symbols_max.append(np.nan)
             min_val.append(np.nan)
             max_val.append(np.nan)
             units.append(np.nan)
         if q%100==0:
             print(q)
     
-    df2[a+"_Symbol"] = symbols
+    del df2[a+"_Symbol"]
+    df2[a+"_MinValueSymbol"] = symbols_min
+    df2[a+"_MaxValueSymbol"] = symbols_max
     df2[a+"_MinValue"] = min_val
     df2[a+"_MaxValue"] = max_val
     df2[a+"_Unit"] = units
 
     print(a)
 
-df2.to_excel(working_dir + "merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation.xlsx", index=False)
+df2.to_excel("/Users/ananthansadagopan/Downloads/test.xlsx", index=False)
