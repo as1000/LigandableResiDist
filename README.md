@@ -41,5 +41,5 @@ Note: The affinity annotations on the resulting spreadsheet are essentially arbi
 
 (13) Remove affinity annotations for entries with multiple ligands in Excel.
 
-(14) Annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx, which is added to the repo for reference.
+(14) Annotate Uniprot metadata for each PDB using Uniprot ID mapping (https://www.uniprot.org/id-mapping/), From database: PDB to database: UniProtKB. This can be done manually and generates the file: merged_rcsb_calls_ffilled_filtered_distance_annotated_affinity_annotation_min_value_uniprot.xlsx.
 
